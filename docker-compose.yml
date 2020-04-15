@@ -1,0 +1,17 @@
+version: "3"
+services:
+  go_and_grpc:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./server:/go/src/app
+    working_dir: /go/src/app
+    tty: true
+    command: sh -c "realize start"
+    ports:
+      - "9000:9000"
+    environment:
+      PORT: 9000
+      # GRPC_GO_LOG_VERBOSITY_LEVEL: 99
+      # GRPC_GO_LOG_SEVERITY_LEVEL: info

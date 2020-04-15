@@ -1,0 +1,13 @@
+FROM golang:1.13.4-alpine3.10
+
+ENV GO111MODULE=on
+ENV GOPATH="/go"
+ENV GOPRIVATE="github.com/Mizumaki/*"
+
+# Need to install gopkg.in/urfave/cli.v2@master, because of realize error: https://github.com/oxequa/realize/issues/253#issuecomment-531750196
+
+RUN apk add --no-cache \
+  alpine-sdk \
+  git \
+  && go get gopkg.in/urfave/cli.v2@master \
+  && GO111MODULE=off go get github.com/oxequa/realize
